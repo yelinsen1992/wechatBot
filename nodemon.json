@@ -1,0 +1,9 @@
+{
+    "ignore" : [
+        "config/*",
+        "node_modules/*",
+        "schedule/*",
+        "superagent/*",
+        "utils/*"
+    ]
+}
