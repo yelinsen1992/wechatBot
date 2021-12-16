@@ -59,23 +59,24 @@ async function onMessage(msg) {
   }
   if (room && isText) {
     // 如果是群消息 目前只处理文字消息
-    console.log(`群名: ${topic} 发消息人: ${alias} 内容: ${content}`);
-    if (content.indexOf('关闭机器人') > -1) {
+    console.log(`群名: ${topic} 发消息人: ${alias} 内容: ${content}`)
+    
+    if (content.match(/关闭机器人|闭嘴吧机器人|闭嘴吧煤球/gi)) {
       config.GROUP_REPLY[index] = false
       room.say('下次再见咯--88')
       return
     }
-    if (content.indexOf('开启机器人') > -1) {
+    if (content.match(/开启机器人|出来吧煤球|出来吧机器人/gi)) {
       config.GROUP_REPLY[index] = true
       room.say('好了，开始吹牛逼吧！')
       return
     }
-    if ((content.indexOf('你妈是') > -1 || content.indexOf('你妈妈是') > -1)) {
+    if (content.match(/你妈是|你妈妈是/gi)) {
       room.say('碗碗啊，你怎么这都不知道啊！')
       return
     }
     if (index > -1 && config.GROUP_REPLY[index]) {
-      const reply = await superagent.ruyiGetReplay(content);
+      const reply = await superagent.ruyiGetReplay(content)
       room.say(reply)
     }
   }
